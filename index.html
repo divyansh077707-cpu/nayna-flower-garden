@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>A Little Garden for You</title>
+<style>
+:root {
+  --site-primary: #e78aa8;
+  --site-secondary: #391a2b;
+  --site-background: #160b13;
+  --site-on-primary: #25101b;
+  --site-on-secondary: #fff0f5;
+  --site-on-background: #fff0f5;
+  --site-font-body: "Trebuchet MS", Arial, sans-serif;
+  --site-font-heading: Georgia, "Times New Roman", serif;
+  --site-heading-scale: 1;
+  --site-spacing-scale: 1;
+  --site-radius-scale: 1;
+  --site-decoration-opacity: 1;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; background: var(--site-background); }
+body { color: #fff1f5; font-family: var(--site-font-body); overflow-x: hidden; }
+#garden-app {
+  position: relative; min-height: 100svh; width: 100%; overflow: hidden;
+  background-color: var(--site-background);
+  background-image: radial-gradient(ellipse at 50% 45%, #4a1a31 0%, #24101c 43%, #160b13 78%);
+  color: var(--site-on-background); isolation: isolate;
+}
+#stars, #petals { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+#stars { opacity: var(--site-decoration-opacity); }
+.topline { position: relative; z-index: 2; padding: calc(22px * var(--site-spacing-scale)) 18px 0; text-align: center; }
+.eyebrow { font: 12px var(--site-font-body); letter-spacing: .24em; text-transform: uppercase; color: #f3b5c9; opacity: .9; }
+h1 { font: normal calc(30px * var(--site-heading-scale))/1.12 var(--site-font-heading); margin: 12px 0 8px; color: #fff0f5; }
+.sub { margin: 0 auto; max-width: 320px; font-size: 14px; line-height: 1.6; color: #dcb6c5; }
+.hint { margin-top: 17px; font: 12px var(--site-font-heading); letter-spacing: .12em; color: #f0abc2; animation: breathe 2.4s ease-in-out infinite; }
+#garden { position: relative; z-index: 1; width: 100%; height: min(58svh, 570px); min-height: 360px; display: block; touch-action: pan-y; cursor: crosshair; }
+.bottom { position: relative; z-index: 2; text-align: center; padding: 0 20px 32px; }
+.counter { color: #cda1b2; font-size: 12px; letter-spacing: .1em; margin: -4px 0 18px; }
+button { appearance: none; border: 1px solid #d986a4; background: #e9a0b7; color: #321522; font: 600 13px var(--site-font-body); letter-spacing: .06em; padding: 13px 21px; border-radius: 999px; cursor: pointer; margin: 4px; transition: transform .2s, background .2s; }
+button:active { transform: scale(.97); }
+button.secondary { background: transparent; color: #f5c7d6; border-color: #795064; }
+#letter { display: none; position: relative; z-index: 4; margin: 0 auto 30px; width: min(90%, 430px); padding: 24px 23px; border: 1px solid #704054; border-radius: calc(20px * var(--site-radius-scale)); background: rgba(43, 17, 31, .92); box-shadow: 0 0 45px rgba(237, 111, 157, .12); text-align: center; animation: appear .8s ease both; }
+#letter.show { display: block; }
+#letter h2 { font: normal 26px var(--site-font-heading); margin: 0 0 14px; color: #ffd4e1; }
+#letter p { color: #f0d9e2; font-size: 14px; line-height: 1.85; margin: 0 0 12px; }
+.signature { font: italic 18px var(--site-font-heading); color: #f5a9c3; margin-top: 15px; }
+footer { color: #866276; font-size: 10px; letter-spacing: .12em; padding-top: 15px; }
+@keyframes breathe { 50% { opacity: .45; } }
+@keyframes appear { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@media (min-width: 700px) { #garden { height: 510px; max-width: 650px; margin: 0 auto; } h1 { font-size: 38px; } .topline { padding-top: 28px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+</style>
+</head>
+<body>
+<main id="garden-app">
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <canvas id="petals" aria-hidden="true"></canvas>
+  <header class="topline">
+    <div class="eyebrow">A little something, just for you</div>
+    <h1>Our love, in bloom</h1>
+    <p class="sub">A tiny garden made with all the love in my heart.</p>
+    <div class="hint">✿ TOUCH OR MOVE YOUR FINGER TO GROW FLOWERS ✿</div>
+  </header>
+  <canvas id="garden" aria-label="Touch the garden to grow a bouquet of flowers"></canvas>
+  <section class="bottom">
+    <div class="counter" id="counter">YOUR GARDEN IS WAITING TO BLOOM</div>
+    <button id="bloom">Grow me a little more 🌷</button>
+    <button id="reveal" class="secondary">A message for you 💌</button>
+    <article id="letter">
+      <h2>Happy Anniversary, my love ❤️</h2>
+      <p>Every little flower in this garden is a reminder of how you make my world more beautiful. If I could choose all over again, in every lifetime and every version of this world, I would still choose you.</p>
+      <p>Thank you for being my favourite person, my happiness, and the sweetest part of my days. Even the smallest moments feel special when they're with you. I may not always find the perfect words, but my heart will always find its way back to you.</p>
+      <p>Here's to us, to the memories we've made, and to all the beautiful ones still waiting for us. Keep blooming with me, okay? 🌸</p>
+      <div class="signature">Forever choosing you ♡</div>
+    </article>
+    <footer>MADE WITH LOVE · JUST FOR YOU</footer>
+  </section>
+</main>
+<script>
+(() => {
+  const app = document.getElementById('garden-app');
+  const garden = document.getElementById('garden');
+  const ctx = garden.getContext('2d');
+  const stars = document.getElementById('stars'), sctx = stars.getContext('2d');
+  const petalCanvas = document.getElementById('petals'), pctx = petalCanvas.getContext('2d');
+  let W = 0, H = 0, blooms = [], falling = [], lastPoint = 0, count = 0, animating = true;
+  const colors = [
+    {petal:'#ffb4cd', inner:'#f26f9d', center:'#f6c84e'},
+    {petal:'#fff0f6', inner:'#ffbdd4', center:'#f7c94d'},
+    {petal:'#ffd66e', inner:'#ffae45', center:'#6a3a26'},
+    {petal:'#ff779b', inner:'#f23d70', center:'#8b2843'},
+    {petal:'#f9c7ff', inner:'#e88bd8', center:'#f7d15b'}
+  ];
+  function resize() {
+    const r = garden.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2);
+    W = r.width; H = r.height;
+    garden.width = Math.round(W*dpr); garden.height = Math.round(H*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    const full = app.getBoundingClientRect();
+    [stars, petalCanvas].forEach(c => { c.width = Math.round(full.width*dpr); c.height = Math.round(full.height*dpr); c.style.width=full.width+'px'; c.style.height=full.height+'px'; });
+    sctx.setTransform(dpr,0,0,dpr,0,0); pctx.setTransform(dpr,0,0,dpr,0,0);
+    sctx.clearRect(0,0,full.width,full.height);
+    for(let i=0;i<90;i++){let x=Math.random()*full.width,y=Math.random()*full.height; sctx.beginPath();sctx.arc(x,y,Math.random()*1.5+.3,0,Math.PI*2);sctx.fillStyle=`rgba(255,220,237,${Math.random()*.55+.12})`;sctx.fill();}
+    if(!blooms.length) { plant(W*.5,H*.83,0); plant(W*.32,H*.86,1); plant(W*.68,H*.86,2); }
+    draw();
+  }
+  function plant(x,y,type) {
+    if(blooms.length>65) blooms.shift();
+    const height = H*(.28+Math.random()*.43);
+    blooms.push({x,y,tx:x+(Math.random()-.5)*W*.18, ty:y-height, size:10+Math.random()*13, color:colors[type??Math.floor(Math.random()*colors.length)], phase:Math.random()*6.28, sway:Math.random()*9, grow:0, leaf:Math.random()});
+    count++; document.getElementById('counter').textContent = count+' LITTLE FLOWER'+(count===1?'':'S')+' IN OUR GARDEN';
+  }
+  function flower(f,t) {
+    const grow=Math.min(1,f.grow); if(grow<=0)return;
+    const x=f.x+(f.tx-f.x)*grow, y=f.y+(f.ty-f.y)*grow;
+    const sway=Math.sin(t*.001+f.phase)*f.sway;
+    ctx.save(); ctx.translate(x,y); ctx.rotate(sway*.012);
+    ctx.strokeStyle='#3c9a59';ctx.lineWidth=2.3;ctx.lineCap='round';
+    ctx.beginPath();ctx.moveTo(0,0);ctx.quadraticCurveTo(-sway,-f.size*2,0,-f.size*5);ctx.stroke();
+    for(let i=0;i<3;i++){let side=i%2?1:-1, ly=-f.size*(1.1+i*.95);ctx.save();ctx.translate(side*f.size*.15,ly);ctx.rotate(side*.62);ctx.fillStyle=i===1?'#5ebc70':'#31864c';ctx.beginPath();ctx.moveTo(0,0);ctx.quadraticCurveTo(side*f.size*1.8,-f.size*.8,side*f.size*1.65,f.size*.1);ctx.quadraticCurveTo(side*f.size*.45,f.size*.35,0,0);ctx.fill();ctx.restore();}
+    const r=f.size*(.7+grow*.3), petals= f.color.center==='#6a3a26'?14:10;
+    ctx.translate(sway*.5,-f.size*5);
+    ctx.shadowColor=f.color.inner;ctx.shadowBlur=13;
+    for(let i=0;i<petals;i++){ctx.save();ctx.rotate(i*Math.PI*2/petals);ctx.fillStyle=f.color.petal;ctx.beginPath();ctx.ellipse(0,-r*.68,r*.34,r*.72,0,0,Math.PI*2);ctx.fill();ctx.restore();}
+    ctx.shadowBlur=2;ctx.fillStyle=f.color.inner;ctx.beginPath();ctx.arc(0,0,r*.47,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle=f.color.center;ctx.beginPath();ctx.arc(0,0,r*.31,0,Math.PI*2);ctx.fill();
+    for(let i=0;i<13;i++){let a=i*2.4, rr=(i%4)/4*r*.25;ctx.fillStyle='rgba(115,66,35,.48)';ctx.beginPath();ctx.arc(Math.cos(a)*rr,Math.sin(a)*rr,1,0,Math.PI*2);ctx.fill();}
+    ctx.restore();
+  }
+  function draw(t=performance.now()) {
+    ctx.clearRect(0,0,W,H);
+    blooms.forEach(f=>{f.grow=Math.min(1,f.grow+.012);flower(f,t);});
+    if(animating) requestAnimationFrame(draw);
+  }
+  function touch(e) {
+    const rect=garden.getBoundingClientRect(), x=e.clientX-rect.left, y=e.clientY-rect.top;
+    const now=performance.now(); if(now-lastPoint<90)return;lastPoint=now;
+    const type=Math.floor(Math.random()*colors.length); plant(x,y,type);
+    for(let i=0;i<5;i++) falling.push({x:x+(Math.random()-.5)*35,y:y+(Math.random()-.5)*25,vx:(Math.random()-.5)*.8,vy:-Math.random()*1.2-.3,life:1,size:Math.random()*3+1});
+  }
+  garden.addEventListener('pointerdown',e=>{touch(e);});
+  garden.addEventListener('pointermove',e=>{if(e.pointerType==='mouse'&&e.buttons)touch(e);});
+  document.getElementById('bloom').addEventListener('click',()=>{for(let i=0;i<4;i++)plant(W*(.18+Math.random()*.64),H*(.78+Math.random()*.12),Math.floor(Math.random()*colors.length));});
+  document.getElementById('reveal').addEventListener('click',()=>{document.getElementById('letter').classList.toggle('show');document.getElementById('reveal').textContent=document.getElementById('letter').classList.contains('show')?'Hide my message 💗':'A message for you 💌';});
+  function petalLoop(){
+    const full=app.getBoundingClientRect();pctx.clearRect(0,0,full.width,full.height);
+    falling=falling.filter(f=>f.life>0);
+    falling.forEach(f=>{f.x+=f.vx;f.y+=f.vy;f.life-=.012;pctx.fillStyle=`rgba(255,165,197,${f.life})`;pctx.beginPath();pctx.ellipse(f.x,f.y,f.size,f.size*.6,.5,0,Math.PI*2);pctx.fill();});
+    requestAnimationFrame(petalLoop);
+  }
+  new ResizeObserver(resize).observe(garden); resize(); petalLoop();
+})();
+</script>
+</body>
+</html>
