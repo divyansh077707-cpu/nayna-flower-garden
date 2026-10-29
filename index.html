@@ -4,94 +4,288 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A Little Garden for Nayna 🌷</title>
+<title>Nayna's Flower Garden 🌷</title>
+
 <style>
-*{box-sizing:border-box}
-body{
- margin:0;min-height:100vh;overflow-x:hidden;
- font-family:Georgia,serif;color:#fff0f6;text-align:center;
- background:radial-gradient(ellipse at top,#652849 0%,#32162f 45%,#130d22 100%);
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Georgia, serif;
+  color: #fff8fc;
+  text-align: center;
+  background: linear-gradient(#241337, #642653 65%, #183c32);
+  overflow-x: hidden;
 }
-main{position:relative;z-index:2;padding:48px 18px 65px}
-h1{font-size:clamp(2.3rem,8vw,4rem);color:#ffc5df;text-shadow:0 0 25px #ff8fca66}
-.subtitle{line-height:1.9;color:#f8d6e7}
-#garden{
- max-width:750px;min-height:280px;margin:25px auto;
- display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:15px;
+
+header { padding: 30px 15px 10px; }
+
+h1 {
+  font-size: clamp(30px, 7vw, 48px);
+  color: #ffd4ed;
+  text-shadow: 0 0 22px #ff8ac8;
+  margin-bottom: 8px;
 }
-.flower{font-size:clamp(2.5rem,8vw,4.5rem);animation:sway 3s ease-in-out infinite;filter:drop-shadow(0 0 12px #ff9aca55)}
-.flower:nth-child(even){animation-delay:-1.2s}
-@keyframes sway{0%,100%{transform:rotate(-9deg) translateY(0)}50%{transform:rotate(9deg) translateY(-13px)}}
-button{
- padding:14px 23px;margin:8px;border:1px solid #ffc1df;border-radius:30px;
- background:linear-gradient(135deg,#b63c7a,#783b91);color:white;
- font-size:1rem;cursor:pointer;box-shadow:0 5px 22px #0004;
+
+.subtitle { color: #ffe5f3; font-size: 17px; }
+
+#garden {
+  position: relative;
+  height: 420px;
+  margin-top: 10px;
+  overflow: hidden;
+  cursor: crosshair;
+  background:
+    radial-gradient(ellipse at 50% 100%, #326b46 0%, #183d35 45%, transparent 75%);
+  border-bottom: 2px solid #66966a;
+  touch-action: manipulation;
 }
-button:hover{filter:brightness(1.15)}
-#letter{
- display:none;max-width:680px;margin:32px auto;padding:27px 23px;
- border:1px solid #f8afd6;border-radius:22px;background:#ffffff0c;
- box-shadow:0 0 35px #f56bab22;font-size:1.08rem;line-height:2;
- overflow-wrap:anywhere;animation:appear .8s ease;
+
+.flower {
+  position: absolute;
+  bottom: 0;
+  width: 76px;
+  height: 230px;
+  transform-origin: bottom center;
+  animation: grow .8s cubic-bezier(.2,.8,.3,1.2) both;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 7px #130c2038);
 }
-#letter p{white-space:pre-wrap}
-@keyframes appear{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
-.petal{position:fixed;top:-35px;z-index:1;pointer-events:none;animation:fall linear forwards}
-@keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:0}}
-footer{color:#e7b6d1;margin-top:38px}
+
+@keyframes grow {
+  from { transform: scale(.05) rotate(-12deg); opacity: 0; }
+  to { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+.stem {
+  position: absolute;
+  width: 5px;
+  height: 155px;
+  bottom: 0;
+  left: 37px;
+  border-radius: 100%;
+  background: linear-gradient(90deg, #28633b, #79b95e, #285638);
+}
+
+.leaf {
+  position: absolute;
+  width: 34px;
+  height: 16px;
+  bottom: 62px;
+  left: 37px;
+  background: linear-gradient(135deg, #9acb69, #23643c);
+  border-radius: 100% 0 100% 0;
+  transform: rotate(-25deg);
+}
+
+.leaf.two {
+  bottom: 100px;
+  left: 8px;
+  transform: scaleX(-1) rotate(-25deg);
+}
+
+.bloom {
+  position: absolute;
+  left: 38px;
+  top: 12px;
+  width: 0;
+  height: 0;
+}
+
+.petal {
+  position: absolute;
+  width: 29px;
+  height: 43px;
+  left: -14px;
+  top: -37px;
+  border-radius: 55% 55% 43% 43%;
+  transform-origin: 50% 37px;
+  background: linear-gradient(110deg, #fff0f8, #ff91c9 50%, #d93891);
+  box-shadow: inset -4px -4px 8px #b82b7438,
+              inset 3px 3px 6px #ffffff8a;
+}
+
+.center {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  left: -11px;
+  top: -11px;
+  background: radial-gradient(circle, #fff2a6 0%, #ffcf55 42%, #a85a2d 75%);
+  box-shadow: 0 0 12px #ffd66e;
+}
+
+.flower.tulip .petal {
+  width: 29px;
+  height: 49px;
+  top: -45px;
+  border-radius: 80% 80% 30% 30%;
+}
+
+.flower.sunflower .petal {
+  background: linear-gradient(90deg, #ffb52e, #fff08a, #ef8a18);
+  width: 22px;
+  height: 39px;
+  top: -35px;
+  border-radius: 70% 70% 35% 35%;
+}
+
+.flower.rose .petal {
+  background: linear-gradient(120deg, #ffc0d8, #ed397d 60%, #a91550);
+  border-radius: 65% 65% 45% 45%;
+  width: 31px;
+  height: 36px;
+}
+
+.flower.rose .center {
+  background: radial-gradient(circle, #ffb0cf, #b81c59);
+}
+
+.hint {
+  padding: 15px;
+  color: #ffe1f2;
+  font-size: 16px;
+}
+
+button {
+  border: none;
+  border-radius: 30px;
+  padding: 13px 21px;
+  margin: 7px;
+  background: linear-gradient(135deg, #ff9bcf, #e65da9);
+  color: #431535;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 16px #ff86c544;
+}
+
+button:active { transform: scale(.96); }
+
+#message {
+  display: none;
+  max-width: 650px;
+  margin: 20px auto;
+  padding: 22px;
+  width: 90%;
+  line-height: 1.9;
+  font-size: 17px;
+  background: #ffffff12;
+  border: 1px solid #ffb5db70;
+  border-radius: 20px;
+  box-shadow: 0 0 25px #ff6eb333;
+}
+
+footer { padding: 25px 10px; color: #ffd2e9; }
+
+@media(max-width: 500px) {
+  #garden { height: 360px; }
+  .flower { transform-origin: bottom center; }
+}
 </style>
 </head>
-<body>
-<main>
-<h1>A Little Garden for You 🌷</h1>
-<p class="subtitle">A tiny magical garden, made just for you, Nayna 💗<br>Touch the flowers and let our garden bloom.</p>
 
-<div id="garden">
-<span class="flower">🌷</span>
-<span class="flower">🌸</span>
-<span class="flower">🌹</span>
-<span class="flower">🌼</span>
-<span class="flower">🪻</span>
+<body>
+<header>
+  <h1>🌷 Nayna's Flower Garden 🌷</h1>
+  <p class="subtitle">A little garden made with a whole lot of love 💗</p>
+</header>
+
+<div id="garden" aria-label="Click anywhere in the garden to grow flowers"></div>
+
+<p class="hint">🌸 Tap anywhere in the garden and watch more flowers grow 🌸</p>
+
+<button onclick="growRandom()">🌱 Grow more flowers</button>
+<button onclick="showMessage()">💌 A message for you</button>
+
+<div id="message">
+Every little flower in ts garden is a reminder of how u make my world more beautiful Nayna If I could choose all over again in every lifetime and every version of ts world I would still choose u my sweetheart thank u for being my favourite person, my happiness, and the sweetest part of my days even the smallest moments feel special when they're with u even on calls chats everywhere I may not always find the perfect words what to say but my heart will always u nd ur beauty like kitniiii khubsurat hooo babuuuu
 </div>
 
-<button onclick="growFlowers()">Grow the garden 🌷</button>
-<button onclick="showLetter()">A message for you 💌</button>
+<footer>Made especially for Nayna ♡ 🌷</footer>
 
-<article id="letter">
-<p>Every little flower in ts garden is a reminder of how u make my world more beautiful Nayna If I could choose all over again in every lifetime and every version of ts world I would still choose u my sweetheart thank u for being my favourite person, my happiness, and the sweetest part of my days even the smallest moments feel special when they're with u even on calls chats everywhere I may not always find the perfect words what to say but my heart will always u nd ur beauty like kitniiii khubsurat hooo babuuuu</p>
-</article>
-
-<footer>For Nayna, with love ♡</footer>
-</main>
 <script>
-const garden=document.getElementById('garden');
-const flowers=['🌷','🌸','🌹','🌼','🪻','💐','🌺'];
+const garden = document.getElementById("garden");
+let flowerCount = 0;
 
-function growFlowers(){
- for(let i=0;i<3;i++){
-  const f=document.createElement('span');
-  f.className='flower';
-  f.textContent=flowers[Math.floor(Math.random()*flowers.length)];
-  f.style.animationDelay=(Math.random()*-2)+'s';
-  garden.appendChild(f);
- }
+function addFlower(x, type) {
+  if (flowerCount >= 90) {
+    flowerCount = 0;
+    garden.innerHTML = "";
+  }
+
+  const flower = document.createElement("div");
+  const kinds = ["", "tulip", "rose", "sunflower"];
+  const chosen = type || kinds[Math.floor(Math.random() * kinds.length)];
+
+  flower.className = "flower " + chosen;
+
+  const left = x === undefined
+    ? 4 + Math.random() * 88
+    : Math.max(2, Math.min(92, x / garden.clientWidth * 100));
+
+  const height = 125 + Math.random() * 155;
+  const scale = 0.65 + Math.random() * 0.65;
+
+  flower.style.left = left + "%";
+  flower.style.height = height + "px";
+  flower.style.transform = "scale(" + scale + ")";
+  flower.style.animationDelay = Math.random() * 0.15 + "s";
+
+  const stem = document.createElement("div");
+  stem.className = "stem";
+  stem.style.height = (height * 0.68) + "px";
+
+  const leaf1 = document.createElement("div");
+  leaf1.className = "leaf";
+
+  const leaf2 = document.createElement("div");
+  leaf2.className = "leaf two";
+
+  const bloom = document.createElement("div");
+  bloom.className = "bloom";
+
+  const petalCount = chosen === "sunflower" ? 14 : 10;
+
+  for (let i = 0; i < petalCount; i++) {
+    const petal = document.createElement("div");
+    petal.className = "petal";
+    petal.style.transform = "rotate(" + (i * 360 / petalCount) + "deg)";
+    bloom.appendChild(petal);
+  }
+
+  const center = document.createElement("div");
+  center.className = "center";
+  bloom.appendChild(center);
+
+  flower.append(stem, leaf1, leaf2, bloom);
+  garden.appendChild(flower);
+  flowerCount++;
 }
-function showLetter(){
- const letter=document.getElementById('letter');
- letter.style.display='block';
- letter.scrollIntoView({behavior:'smooth',block:'center'});
+
+garden.addEventListener("click", function(event) {
+  const rect = garden.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+
+  addFlower(x);
+  if (flowerCount < 90) addFlower(x + (Math.random() * 50 - 25));
+});
+
+function growRandom() {
+  for (let i = 0; i < 5; i++) addFlower();
 }
-function makePetal(){
- const p=document.createElement('span');
- p.className='petal';
- p.textContent=['🌸','🌷','💗','✨'][Math.floor(Math.random()*4)];
- p.style.left=Math.random()*100+'vw';
- p.style.fontSize=(14+Math.random()*17)+'px';
- p.style.animationDuration=(6+Math.random()*7)+'s';
- document.body.appendChild(p);
- setTimeout(()=>p.remove(),14000);
+
+function showMessage() {
+  const box = document.getElementById("message");
+  box.style.display = box.style.display === "block" ? "none" : "block";
+  if (box.style.display === "block") {
+    box.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
 }
-setInterval(makePetal,650);
+
+for (let i = 0; i < 12; i++) addFlower();
 </script>
 </body>
 </html>
